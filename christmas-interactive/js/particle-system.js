@@ -1,3 +1,8 @@
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
 export class ParticleSystem {
     constructor(container) {
         this.container = container;
@@ -168,14 +173,14 @@ export class ParticleSystem {
 
     setupPostProcessing() {
         // Composer
-        this.composer = new THREE.EffectComposer(this.renderer);
+        this.composer = new EffectComposer(this.renderer);
         
         // Render pass
-        const renderPass = new THREE.RenderPass(this.scene, this.camera);
+        const renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(renderPass);
         
         // Bloom pass
-        this.bloomPass = new THREE.UnrealBloomPass(
+        this.bloomPass = new UnrealBloomPass(
             new THREE.Vector2(window.innerWidth, window.innerHeight),
             1.5, // strength
             0.4, // radius
@@ -281,12 +286,6 @@ export class ParticleSystem {
             dummy.position.copy(particle.position);
             dummy.rotation.copy(particle.rotation);
             dummy.scale.setScalar(particle.scale);
-            
-            // Apply texture if it's an image particle
-            if (particle.isImage && particle.imageTexture) {
-                // Image particles handled separately
-            }
-            
             dummy.updateMatrix();
             this.instancedMesh.setMatrixAt(i, dummy.matrix);
         });

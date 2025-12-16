@@ -9,6 +9,7 @@ class ChristmasInteractive {
         this.handTracker = null;
         this.isPinching = false;
         this.pinnedParticle = null;
+        this.currentStatusMessage = '';
         
         this.init();
     }
@@ -162,6 +163,7 @@ class ChristmasInteractive {
     }
 
     updateStatus(message, type = 'success') {
+        this.currentStatusMessage = message;
         this.statusElement.textContent = message;
         this.statusElement.className = '';
         this.statusElement.classList.add(type);
@@ -169,7 +171,7 @@ class ChristmasInteractive {
         // Auto-clear success messages after 3 seconds
         if (type === 'success') {
             setTimeout(() => {
-                if (this.statusElement.textContent === message) {
+                if (this.currentStatusMessage === message) {
                     this.updateStatus('Ready! Use hand gestures 👋', 'success');
                 }
             }, 3000);
