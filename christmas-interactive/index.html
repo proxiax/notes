@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Interactive 3D Particle System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Video element for webcam (hidden) -->
+    <video id="webcam" autoplay playsinline></video>
+    
+    <!-- Canvas for MediaPipe visualization (optional, for debugging) -->
+    <canvas id="handCanvas"></canvas>
+    
+    <!-- Three.js render canvas -->
+    <div id="container"></div>
+    
+    <!-- UI Overlay -->
+    <div id="ui-overlay">
+        <div class="control-panel">
+            <h1>🎄 Christmas Particle Magic</h1>
+            <p class="instructions">
+                ✋ Open/Close hands: Control particle spread<br>
+                ✊ Fist: Form Christmas tree<br>
+                🖐️ Open after fist: Rotate tree<br>
+                🤏 Pinch: Zoom image
+            </p>
+            <div class="button-group">
+                <label for="imageUpload" class="upload-btn">
+                    📸 Upload Image
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                </label>
+                <button id="fullscreenBtn">⛶ Fullscreen</button>
+            </div>
+            <div id="status">Initializing...</div>
+        </div>
+    </div>
+
+    <!-- Import Maps for ES Modules -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.159.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    
+    <!-- Application Scripts -->
+    <script type="module" src="js/particle-system.js"></script>
+    <script type="module" src="js/hand-tracker.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

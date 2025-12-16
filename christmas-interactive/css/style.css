@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+}
+
+#container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#webcam {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 200px;
+    height: 150px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    z-index: 100;
+    transform: scaleX(-1);
+    display: none;
+}
+
+#handCanvas {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 200px;
+    height: 150px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    z-index: 101;
+    display: none;
+}
+
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.control-panel {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 20px 30px;
+    max-width: 400px;
+    pointer-events: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.control-panel h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.instructions {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.upload-btn,
+#fullscreenBtn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.upload-btn:hover,
+#fullscreenBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#fullscreenBtn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+#status {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#status.success {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+#status.error {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+#status.warning {
+    background: rgba(255, 152, 0, 0.2);
+    color: #ff9800;
+}
+
+/* Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .control-panel {
+        max-width: 100%;
+        padding: 15px 20px;
+    }
+    
+    .control-panel h1 {
+        font-size: 20px;
+    }
+    
+    .instructions {
+        font-size: 12px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+}
+
+/* Fullscreen styles */
+body:fullscreen #ui-overlay {
+    padding: 10px;
+}
+
+body:fullscreen .control-panel {
+    max-width: 300px;
+    padding: 15px 20px;
+}
